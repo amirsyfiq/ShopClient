@@ -1,7 +1,15 @@
+import { RegisterComponent } from './pages/register/register/register.component';
+import { HomepageComponent } from './pages/homepage/homepage/homepage.component';
+import { LoginComponent } from './pages/login/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'homepage', component: HomepageComponent },
+  { path: '', redirectTo: 'homepage', pathMatch: 'full' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
