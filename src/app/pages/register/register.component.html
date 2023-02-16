@@ -1,1 +1,30 @@
-<p>register works!</p>
+<div class="container">
+  <mat-card class="register-card">
+    <mat-toolbar color="primary">
+      <span>Register</span>
+    </mat-toolbar>
+    <mat-card-content>
+      <form class="register-form">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Full Name" name="name" [(ngModel)]="user.name">
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" name="email" [(ngModel)]="user.email">
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" name="password" [(ngModel)]="user.password">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="register(user)">Register</button>
+    </mat-card-actions>
+    <mat-divider></mat-divider>
+    <div class="register-card-footer">
+      <p>Already has an account? <br> <a routerLink="/login">Login</a> </p>
+    </div>
+  </mat-card>
+</div>

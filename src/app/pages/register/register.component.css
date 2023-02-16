@@ -1,0 +1,36 @@
+.container{
+  margin-top: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.register-card {
+  margin: auto;
+  max-width: 400px;
+  background-color: whitesmoke;
+}
+
+span{
+  margin: auto;
+  text-transform: uppercase;
+}
+
+.register-form{
+  margin-top: 20px;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.register-card-footer{
+  margin: auto;
+  padding-top: 5px;
+}
+
+p{
+  text-align: center;
+}
