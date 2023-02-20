@@ -1,16 +1,14 @@
-<!-- Toolbar -->
-<p>
-  <mat-toolbar color="primary">
-    <button mat-icon-button [routerLink]="'/homepage'" class="example-icon">
-      <mat-icon>home</mat-icon>
-    </button>
-    <span class="title">Shopping App</span>
-    <span class="example-spacer"></span>
-    <button *ngIf="!isLogin" mat-mini-fab color="primary" routerLink="/login" matTooltip="Login">
-      <mat-icon>login</mat-icon>
-    </button>
-    <button *ngIf="isLogin" mat-mini-fab color="primary" (click)="logout()" matTooltip="Logout">
-      <mat-icon>logout</mat-icon>
-    </button>
-  </mat-toolbar>
-</p>
+<mat-toolbar color="primary">
+  <button mat-icon-button [routerLink]="'/homepage'" class="example-icon">
+    <mat-icon>home</mat-icon>
+  </button>
+  <span class="title">Shopping App</span>
+  <span class="example-spacer"></span>
+  <app-mini-cart *ngIf="isLogin" [carts]="carts" [cartQuantity]="cartQuantity"></app-mini-cart>
+  <button *ngIf="isLogin" mat-icon-button (click)="logout()" matTooltip="Logout">
+    <mat-icon>logout</mat-icon>
+  </button>
+  <button *ngIf="!isLogin" mat-mini-fab color="primary" routerLink="/login" matTooltip="Login">
+    <mat-icon>login</mat-icon>
+  </button>
+</mat-toolbar>

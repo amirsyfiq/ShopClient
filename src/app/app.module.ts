@@ -12,7 +12,9 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { PageSidenavComponent } from './pages/page-sidenav/page-sidenav.component';
 import { PageHeaderComponent } from './pages/page-header/page-header.component';
+import { ProductCardComponent } from './pages/homepage/product-card/product-card.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { MiniCartComponent } from './pages/page-header/mini-cart/mini-cart.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AuthInterceptor } from './services/auth.interceptor';
     HomepageComponent,
     RegisterComponent,
     PageHeaderComponent,
-    PageSidenavComponent
+    PageSidenavComponent,
+    ProductCardComponent,
+    MiniCartComponent
   ],
   imports: [
     BrowserModule,

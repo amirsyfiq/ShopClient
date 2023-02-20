@@ -9,18 +9,19 @@ import { Component } from '@angular/core';
 })
 export class RegisterComponent {
 
-  user = new User();
-
   constructor(private authService: AuthService) {}
 
+  user = new User();
+
+  // Register new User
   register(user: User){
     this.authService.register(user).subscribe();
   }
 
+  // Get the User Details(ID)
   getUser(){
     this.authService.getUser().subscribe((userId: string) => {
       console.log(userId);
     })
   }
-
 }

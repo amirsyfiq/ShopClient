@@ -11,19 +11,27 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit  {
 
-  user = new User();
-
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute, private _snackBar: MatSnackBar) {}
+
+  user = new User();
 
   ngOnInit(): void {
 
   }
 
+  // Login the User
   login(user: User){
     this.authService.login(user).subscribe((token: string) => {
       localStorage.setItem('authToken', token);
-      this.router.navigateByUrl('/homepage');
-      this._snackBar.open('Logged in successfull!', 'OK', { duration: 3000});
+      this.router.navigateByUrl('/homepage').then(() => {
+        window.location.reload();
+      });
+
+      this._snackBar.open('You have successfully logged in!', 'OK', { duration: 3000});
+
+      this.authService.getUser().subscribe((userId: string) => {
+        localStorage.setItem('userId', userId);
+      });
     });
   }
 }
