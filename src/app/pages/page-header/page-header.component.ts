@@ -18,8 +18,8 @@ export class PageHeaderComponent implements OnInit, OnDestroy {
   carts: Array<Cart> | undefined;
   cartsSubcription: Subscription | undefined;
 
-  isLogin: Boolean = false;
-  cartQuantity = 0;
+  isLogin: number | undefined;
+  cartQuantity: number = 0;
 
   ngOnInit(): void {
     this.isLogin = this.authService.checkLogin();
@@ -33,7 +33,9 @@ export class PageHeaderComponent implements OnInit, OnDestroy {
     if(id){
       this.cartsSubcription = this.cartService.getAllItem(id).subscribe((_carts) => {
         this.carts = _carts;
-        this.cartQuantity = _carts.length;
+        for(let cart of _carts){
+          this.cartQuantity = this.cartQuantity + cart.quantity;
+        }
       });
     }
   }

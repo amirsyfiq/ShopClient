@@ -1,9 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { PageHeaderComponent } from '../page-header/page-header.component';
 
 @Component({
   selector: 'app-homepage',
@@ -12,13 +15,15 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomepageComponent implements OnInit, OnDestroy {
 
-  constructor(private productService: ProductService, private authService: AuthService) { }
+  constructor(private productService: ProductService, private authService: AuthService, private cartService: CartService, private _snackBar: MatSnackBar) { }
 
   products: Array<Product> | undefined;
   productsSubscription: Subscription | undefined;
   category: Array<Category> | undefined;
   categorySubscription: Subscription | undefined;
-  categoryName: string | null = 'ALL CATEGORIES';
+  categoryName: string | null = 'All Categories';
+
+  // @ViewChild(PageHeaderComponent, {static : true}) pageChild! : PageHeaderComponent;
 
   ngOnInit(): void {
     this.getCategoryList();
@@ -29,7 +34,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
       this.getCategory(id);
     }
     else{
-      this.categoryName = 'ALL CATEGORIES';
+      this.categoryName = 'All Categories';
       this.getAllProduct();
     }
   }
@@ -62,11 +67,25 @@ export class HomepageComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Button Function on Get List of Products based on Category(ID)
+  // Button Function to Get List of Products based on Category(ID)
   onGetCategory(id: number, name: string): void{
     localStorage.setItem('categoryId', id.toString());
     localStorage.setItem('categoryName', name);
     window.location.reload();
+  }
+
+  // Button Function to Add Products into User Cart
+  onAddItem(productId: number): void{
+    let userId = this.authService.checkLogin();
+    if(userId){
+      var addItemObject = {userId, productId};
+      this.cartService.addItem(addItemObject).subscribe();
+      window.location.reload();
+      this._snackBar.open('Product successfully added into the cart!', 'OK', { duration: 3000});
+    }
+    else{
+      window.alert("Please Login to add product into your cart!");
+    }
   }
 
   // Get the User Details(ID)
@@ -84,5 +103,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
     if(this.categorySubscription){
       this.categorySubscription.unsubscribe();
     }
+
+    localStorage.removeItem('categoryId');
+    localStorage.removeItem('categoryName');
   }
 }

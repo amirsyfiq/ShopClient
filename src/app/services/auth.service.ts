@@ -31,15 +31,13 @@ export class AuthService {
   }
 
   // Check Login Status for User
-  public checkLogin(): Boolean{
-    let isLogin;
+  public checkLogin(): number | undefined{
+    let loginID;
 
-    if(localStorage.getItem('authToken') === null || localStorage.getItem('userId') === null)
-      isLogin = false;
-    else{
-      isLogin = true;
+    if(localStorage.getItem('authToken') && localStorage.getItem('userId')){
+      loginID = Number(localStorage.getItem('userId'));
     }
 
-    return isLogin;
+    return loginID;
   }
 }

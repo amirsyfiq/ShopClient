@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { PageSidenavComponent } from './pages/page-sidenav/page-sidenav.component';
 import { PageHeaderComponent } from './pages/page-header/page-header.component';
 import { ProductCardComponent } from './pages/homepage/product-card/product-card.component';
 import { AuthInterceptor } from './services/auth.interceptor';
@@ -23,7 +22,6 @@ import { MiniCartComponent } from './pages/page-header/mini-cart/mini-cart.compo
     HomepageComponent,
     RegisterComponent,
     PageHeaderComponent,
-    PageSidenavComponent,
     ProductCardComponent,
     MiniCartComponent
   ],

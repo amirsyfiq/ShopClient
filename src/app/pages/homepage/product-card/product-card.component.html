@@ -10,7 +10,7 @@
       <div class="card-footer">
         <div><span>{{ product.price | currency }}</span></div>
         <div>
-          <button mat-icon-button color="primary">
+          <button mat-icon-button color="primary" (click)="onAddItem(product.id)">
             <mat-icon>add_shopping_cart</mat-icon>
           </button>
         </div>
