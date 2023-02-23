@@ -3,24 +3,26 @@
 <div class="container-fluid p-1">
   <mat-drawer-container class="content">
     <mat-drawer-content>
-      <button class="btn btn-danger" (click)="getUser()">Get ID</button>
-      <div class="row p-0 m-0 pt-2">
-        <div class="col-sm-12 col-md-6 col-lg-3 float-end">
-          <mat-form-field appearance="outline">
-            <mat-label class="fw-bold">CATEGORY</mat-label>
-            <select matNativeControl required>
-              <option value="All">All</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
-            </select>
-          </mat-form-field>
+      <!-- <button class="btn btn-danger" (click)="getUser()">Get ID</button> -->
+      <div class="row p-0 m-0 pt-2" *ngIf="category">
+        <div class="d-flex justify-content-end">
+          <button mat-raised-button [matMenuTriggerFor]="menu" color="primary">Categories</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onGetAllProduct()">--All Category--</button>
+            <button *ngFor="let categories of category" mat-menu-item [value]="categories.id" (click)="onGetCategory(categories.id, categories.name)">{{categories.name}}</button>
+          </mat-menu>
         </div>
       </div>
-      <div class="row p-0 m-0 pt-2">
+      <div class="row p-0 m-0 pt-3">
+        <div class="text-center text-uppercase fw-bold fs-6">{{categoryName}}</div>
+      </div>
+      <div class="row p-0 m-0 pt-2" *ngIf="products">
         <div class="col-sm-12 col-md-6 col-lg-3 p-1" *ngFor="let product of products">
           <app-product-card [product]="product"></app-product-card>
         </div>
+      </div>
+      <div class="row p-0 m-0 pt-4" *ngIf="!products">
+        <div class="text-center">No Product Found!</div>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

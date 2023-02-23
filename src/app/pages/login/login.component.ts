@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit  {
   }
 
   // Login the User
-  login(user: User){
+  login(user: User): void{
     this.authService.login(user).subscribe((token: string) => {
       localStorage.setItem('authToken', token);
       this.router.navigateByUrl('/homepage').then(() => {

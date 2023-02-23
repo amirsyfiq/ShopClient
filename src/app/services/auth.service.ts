@@ -22,8 +22,7 @@ export class AuthService {
 
   // Perform Logout for User
   public logout(): void{
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userId');
+    localStorage.clear();
   }
 
   // Get User Details(ID) for User

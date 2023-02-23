@@ -30,10 +30,12 @@ export class PageHeaderComponent implements OnInit, OnDestroy {
   getAllItem(): void{
     let id = Number(localStorage.getItem('userId'));
 
-    this.cartsSubcription = this.cartService.getAllItem(id).subscribe((_carts) => {
-      this.carts = _carts;
-      this.cartQuantity = _carts.length;
-    });
+    if(id){
+      this.cartsSubcription = this.cartService.getAllItem(id).subscribe((_carts) => {
+        this.carts = _carts;
+        this.cartQuantity = _carts.length;
+      });
+    }
   }
 
   // Logout the User
