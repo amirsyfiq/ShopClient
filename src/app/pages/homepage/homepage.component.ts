@@ -79,9 +79,10 @@ export class HomepageComponent implements OnInit, OnDestroy {
     let userId = this.authService.checkLogin();
     if(userId){
       var addItemObject = {userId, productId};
-      this.cartService.addItem(addItemObject).subscribe();
-      window.location.reload();
-      this._snackBar.open('Product successfully added into the cart!', 'OK', { duration: 3000});
+      if(this.cartService.addItem(addItemObject).subscribe()){
+        window.location.reload();
+        this._snackBar.open('Product successfully added into the cart!', 'OK', { duration: 3000});
+      }
     }
     else{
       window.alert("Please Login to add product into your cart!");

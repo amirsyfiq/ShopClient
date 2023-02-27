@@ -5,29 +5,40 @@
   <!-- If Cart is not Empty -->
   <div *ngIf="carts" class="mini-cart">
     <div class="text-center"><span class="fw-bold">{{cartQuantity}} </span>ITEMS IN CART</div>
+    <mat-divider class="p-0 m-0 mt-2"></mat-divider>
     <div class="cart-list pt-2 pb-2">
       <div *ngFor="let cart of carts; let i = index">
-        <div class="d-flex justify-content-between">
-          <div>
-            <span class="small">{{i + 1}}. </span>
-            <span class="small">{{cart.products.name}}</span>
+        <div class="row m-0 p-0">
+          <div class="d-flex justify-content-between">
+            <div>
+              <span class="small">{{i + 1}}. </span>
+              <span class="small text-break">{{cart.products.name}}</span>
+            </div>
+            <span class="small">{{cart.quantity}}</span>
           </div>
-          <span class="small">{{cart.quantity}} <span class="fw-bold">| {{ cart.total | currency }}</span></span>
+        </div>
+        <div class="row m-0 p-0 text-end">
+          <span class="small">{{ cart.total | currency }}</span>
         </div>
         <div class="pt-1 pb-1">
           <mat-divider></mat-divider>
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-between">
-      <div>
-        <button mat-raised-button color="primary" routerLink="">View Cart</button>
+    <div class="row m-0 p-0">
+      <div class="d-flex justify-content-between pb-2">
+        <span class="small fw-bold">TOTAL :</span>
+        <span class="small fw-bold">{{ getTotal(carts) | currency }}</span>
       </div>
-      <span class="small">TOTAL : <span class="fw-bold">{{ getTotal(carts) | currency }}</span></span>
+    </div>
+    <div class="row p-0 m-0 justify-content-center">
+      <div class="col-auto">
+        <button mat-raised-button color="primary" routerLink="/cart">View Cart</button>
+      </div>
     </div>
   </div>
   <!-- If Cart is Empty -->
   <div *ngIf="!carts" class="mini-cart">
-    <div class="text-center">Cart is Empty!</div>
+    <div class="text-center">Cart is Empty!<br><a routerLink="/homepage">Start Shopping Now</a></div>
   </div>
 </mat-menu>

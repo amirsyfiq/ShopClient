@@ -28,10 +28,8 @@ export class PageHeaderComponent implements OnInit, OnDestroy {
 
   // Get List of Items in Cart for User (Based on User ID)
   getAllItem(): void{
-    let id = Number(localStorage.getItem('userId'));
-
-    if(id){
-      this.cartsSubcription = this.cartService.getAllItem(id).subscribe((_carts) => {
+    if(this.isLogin){
+      this.cartsSubcription = this.cartService.getAllItem(this.isLogin).subscribe((_carts) => {
         this.carts = _carts;
         for(let cart of _carts){
           this.cartQuantity = this.cartQuantity + cart.quantity;

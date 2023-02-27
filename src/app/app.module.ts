@@ -14,6 +14,7 @@ import { PageHeaderComponent } from './pages/page-header/page-header.component';
 import { ProductCardComponent } from './pages/homepage/product-card/product-card.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { MiniCartComponent } from './pages/page-header/mini-cart/mini-cart.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MiniCartComponent } from './pages/page-header/mini-cart/mini-cart.compo
     RegisterComponent,
     PageHeaderComponent,
     ProductCardComponent,
-    MiniCartComponent
+    MiniCartComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

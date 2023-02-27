@@ -1,10 +1,10 @@
 <mat-card class="product-card" *ngIf="product">
   <div>
-    <img [src]="product.imageURL" alt="Image" />
     <div>
+      <img class="img-thumbnail" [src]="product.imageURL" alt="Image" />
       <div>
         <p style="font-weight: bold;">{{product.name}}</p>
-        <p style="font-size: small;">{{product.description}}</p>
+        <p class="text-truncate" style="font-size: small;">{{product.description}}</p>
       </div>
       <mat-divider></mat-divider>
       <div class="card-footer">

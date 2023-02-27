@@ -1,1 +1,73 @@
-<p>cart works!</p>
+<app-page-header></app-page-header>
+<div class="container-fluid p-1">
+  <mat-drawer-container class="content">
+    <mat-drawer-content>
+      <div class="row p-0 m-0 pt-2">
+        <div class="text-center text-uppercase fw-bold fs-6">My Cart</div>
+      </div>
+
+      <div class="row p-0 m-0 pt-1" *ngIf="carts">
+        <ul class="list-group p-2">
+          <li class="list-group-item p-1" *ngFor="let cart of carts; let i = index">
+            <div class="row p-0 m-0">
+              <div class="col-8">
+                <div class="row">
+                  <span class="fw-bold text-break">{{i + 1}}. {{cart.products.name}} </span>
+                </div>
+                <div class="row">
+                  <p class="small text-break text-muted">{{ cart.products.description }}</p>
+                </div>
+                <div class="row">
+                  <span>{{ cart.products.price | currency }}</span>
+                </div>
+                <div class="row">
+                  <button (click)="onRemoveItem(cart.id)" mat-icon-button color="warn">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="col-4 text-end">
+                <div class="row">
+                  <div class="col">
+                    <div class="d-flex flex-column flex-md-row align-items-center">
+                      <button (click)="onDecreaseQuantity(cart.id)" mat-icon-button color="warn">
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                      <span class="fw-bold">{{cart.quantity}}</span>
+                      <button (click)="onIncreaseQuantity(cart.id)" mat-icon-button color="primary">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <span class="fw-bold">{{ cart.total | currency }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item p-1">
+            <div class="row p-0 m-0">
+              <div class="d-flex justify-content-between pt-2 pb-2">
+                <span class="fw-bold">SUBTOTAL :</span>
+                <span class="fw-bold">{{ getTotal(carts) | currency }}</span>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item p-2">
+            <div class="row p-0 m-0 justify-content-center">
+              <div class="col-auto">
+                <button (click)="onRemoveAllItem()" class="mx-1" mat-raised-button color="warn">Clear</button>
+                <button (click)="onCheckout()" class="mx-1" mat-raised-button color="primary">Checkout</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="row p-0 m-0 pt-3" *ngIf="!carts">
+        <div class="text-center">Cart is Empty!<br> <a routerLink="/homepage">Start Shopping Now</a></div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

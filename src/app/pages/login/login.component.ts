@@ -23,15 +23,20 @@ export class LoginComponent implements OnInit  {
   login(user: User): void{
     this.authService.login(user).subscribe((token: string) => {
       localStorage.setItem('authToken', token);
-      this.router.navigateByUrl('/homepage').then(() => {
-        window.location.reload();
-      });
 
-      this._snackBar.open('You have successfully logged in!', 'OK', { duration: 3000});
+      if(token){
+        this.authService.getUser().subscribe((userId: string) => {
+          localStorage.setItem('userId', userId);
 
-      this.authService.getUser().subscribe((userId: string) => {
-        localStorage.setItem('userId', userId);
-      });
+          if(userId){
+            this.router.navigateByUrl('/homepage').then(() => {
+              window.location.reload();
+            });
+
+            this._snackBar.open('You have successfully logged in!', 'OK', { duration: 3000});
+          }
+        });
+      }
     });
   }
 }
