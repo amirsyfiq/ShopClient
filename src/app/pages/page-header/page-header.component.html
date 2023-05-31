@@ -5,9 +5,26 @@
   <span class="title">Shopping App</span>
   <span class="example-spacer"></span>
   <app-mini-cart *ngIf="isLogin" [carts]="carts" [cartQuantity]="cartQuantity"></app-mini-cart>
-  <button *ngIf="isLogin" mat-icon-button (click)="logout()" matTooltip="Logout">
-    <mat-icon>logout</mat-icon>
+
+  <button *ngIf="isLogin" mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button *ngIf="isLogin" mat-menu-item routerLink="/homepage" matTooltip="Homepage">
+      <span class="small">Homepage</span>
+      <mat-icon>home</mat-icon>
+    </button>
+    <button *ngIf="isLogin" mat-menu-item matTooltip="Purchase History">
+      <span class="small">Purchase History</span>
+      <mat-icon>history</mat-icon>
+    </button>
+    <button *ngIf="isLogin" mat-menu-item (click)="logout()" matTooltip="Logout">
+      <span class="small">Logout</span>
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-menu>
+
+
   <button *ngIf="!isLogin" mat-icon-button routerLink="/login" matTooltip="Login">
     <mat-icon>login</mat-icon>
   </button>

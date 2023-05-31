@@ -7,34 +7,32 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit  {
-
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute, private _snackBar: MatSnackBar) {}
+export class LoginComponent implements OnInit {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
+  ) {}
 
   user = new User();
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   // Login the User
-  login(user: User): void{
+  login(user: User): void {
     this.authService.login(user).subscribe((token: string) => {
       localStorage.setItem('authToken', token);
 
-      if(token){
-        this.authService.getUser().subscribe((userId: string) => {
-          localStorage.setItem('userId', userId);
+      if (token) {
+        this.router.navigateByUrl('/homepage').then(() => {
+          // window.location.reload();
+        });
 
-          if(userId){
-            this.router.navigateByUrl('/homepage').then(() => {
-              window.location.reload();
-            });
-
-            this._snackBar.open('You have successfully logged in!', 'OK', { duration: 3000});
-          }
+        this._snackBar.open('You have successfully logged in!', 'OK', {
+          duration: 3000,
         });
       }
     });

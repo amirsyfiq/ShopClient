@@ -1,0 +1,77 @@
+<app-page-header></app-page-header>
+
+<div class="container-fluid p-1">
+  <mat-drawer-container class="content">
+    <mat-drawer-content>
+      <div class="p-0 m-0 pt-3 m-1">
+        <mat-card class="checkout-card mx-auto">
+          <div class="row p-0 m-0 pt-3">
+            <div class="text-center text-uppercase fw-bold fs-6">Checkout</div>
+          </div>
+          <mat-card-content>
+            <form>
+              <div class="row pt-3">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input type="string" matInput placeholder="Full Name" name="name" [(ngModel)]="checkout.name">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="Email" name="email" [(ngModel)]="checkout.email">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Address 1</mat-label>
+                    <input type="string" matInput placeholder="Address 1" name="address1" [(ngModel)]="checkout.address1">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Address 2</mat-label>
+                    <input type="string" matInput placeholder="Address 2" name="address2" [(ngModel)]="checkout.address2">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input type="string" matInput placeholder="City" name="city" [(ngModel)]="checkout.city">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Postal Code</mat-label>
+                    <input type="string" matInput placeholder="Postal Code" name="postalCode" [(ngModel)]="checkout.postalCode">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>State</mat-label>
+                    <input type="string" matInput placeholder="State" name="state" [(ngModel)]="checkout.state">
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+          <mat-card-actions class="checkout-card-footer">
+            <div class="row p-0 m-0 justify-content-between">
+              <div class="col-auto">
+                <button mat-stroked-button class="mx-1" routerLink="/cart" color="basic">Back</button>
+                <button mat-raised-button class="mx-1" color="primary" (click)="onAddCheckout(checkout)">Next</button>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

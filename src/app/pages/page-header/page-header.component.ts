@@ -9,16 +9,20 @@ import { CartService } from 'src/app/services/cart.service';
 @Component({
   selector: 'app-page-header',
   templateUrl: './page-header.component.html',
-  styleUrls: ['./page-header.component.css']
+  styleUrls: ['./page-header.component.css'],
 })
 export class PageHeaderComponent implements OnInit, OnDestroy {
-
-  constructor(private authService: AuthService, private router: Router, private _snackBar: MatSnackBar, private cartService: CartService){}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    private cartService: CartService
+  ) {}
 
   carts: Array<Cart> | undefined;
   cartsSubcription: Subscription | undefined;
 
-  isLogin: number | undefined;
+  isLogin: boolean = false;
   cartQuantity: number = 0;
 
   ngOnInit(): void {
@@ -27,22 +31,28 @@ export class PageHeaderComponent implements OnInit, OnDestroy {
   }
 
   // Get List of Items in Cart for User (Based on User ID)
-  getAllItem(): void{
-    if(this.isLogin){
-      this.cartsSubcription = this.cartService.getAllItem(this.isLogin).subscribe((_carts) => {
-        this.carts = _carts;
-        for(let cart of _carts){
-          this.cartQuantity = this.cartQuantity + cart.quantity;
-        }
-      });
+  getAllItem(): void {
+    if (this.isLogin) {
+      this.cartsSubcription = this.cartService
+        .getAllItem()
+        .subscribe((_carts) => {
+          this.carts = _carts;
+          for (let cart of _carts) {
+            this.cartQuantity = this.cartQuantity + cart.quantity;
+          }
+        });
     }
   }
 
   // Logout the User
   logout(): void {
-    this.authService.logout();
-    this.router.navigateByUrl('/login');
-    this._snackBar.open('You have successfully logged out!', 'OK', { duration: 3000});
+    if (window.confirm('Are you sure to logout?')) {
+      this.authService.logout();
+      this.router.navigateByUrl('/login');
+      this._snackBar.open('You have successfully logged out!', 'OK', {
+        duration: 3000,
+      });
+    }
   }
 
   // Get the User Details(ID)
@@ -53,7 +63,7 @@ export class PageHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.cartsSubcription){
+    if (this.cartsSubcription) {
       this.cartsSubcription.unsubscribe();
     }
   }

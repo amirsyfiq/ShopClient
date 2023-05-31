@@ -12,12 +12,12 @@ export class AuthService {
 
   // Register Service for User
   public register(user: User): Observable<any> {
-    return this.http.post<any>('https://localhost:7009/ShopAPI/User/Register', user);
+    return this.http.post<any>('http://www.shop-api.somee.com/ShopAPI/User/Register', user);
   }
 
   // Login Service for User
   public login(user: User): Observable<string> {
-    return this.http.post('https://localhost:7009/ShopAPI/User/Login', user, {responseType: 'text'});
+    return this.http.post('http://www.shop-api.somee.com/ShopAPI/User/Login', user, {responseType: 'text'});
   }
 
   // Perform Logout for User
@@ -27,17 +27,17 @@ export class AuthService {
 
   // Get User Details(ID) for User
   public getUser(): Observable<string> {
-    return this.http.get('https://localhost:7009/ShopAPI/User/GetUser', {responseType: 'text'});
+    return this.http.get('http://www.shop-api.somee.com/ShopAPI/User/GetUser', {responseType: 'text'});
   }
 
   // Check Login Status for User
-  public checkLogin(): number | undefined{
-    let loginID;
+  public checkLogin(): boolean{
+    let isLogin: boolean = false;
 
-    if(localStorage.getItem('authToken') && localStorage.getItem('userId')){
-      loginID = Number(localStorage.getItem('userId'));
+    if(localStorage.getItem('authToken')){
+      isLogin = true
     }
 
-    return loginID;
+    return isLogin;
   }
 }

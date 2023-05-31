@@ -13,16 +13,16 @@ export class ProductService {
 
   // Get List of Products Service
   public getAllProduct(): Observable<Array<Product>>{
-    return this.http.get<Array<Product>>('https://localhost:7009/ShopAPI/Product/GetAllProduct');
+    return this.http.get<Array<Product>>('http://www.shop-api.somee.com/ShopAPI/Product/GetAllProduct');
   }
 
   // Get List of Category Service
   public getCategoryList(): Observable<Array<Category>>{
-    return this.http.get<Array<Category>>('https://localhost:7009/ShopAPI/Product/GetCategoryList');
+    return this.http.get<Array<Category>>('http://www.shop-api.somee.com/ShopAPI/Product/GetCategoryList');
   }
 
   // Get List of Category Service
   public getCategory(id: number): Observable<Array<Product>>{
-    return this.http.get<Array<Product>>(`https://localhost:7009/ShopAPI/Product/GetCategory/${id}`);
+    return this.http.get<Array<Product>>(`http://www.shop-api.somee.com/ShopAPI/Product/GetCategory/${id}`);
   }
 }

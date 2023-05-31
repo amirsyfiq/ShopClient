@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AddCart, Cart } from '../models/cart';
+import { Cart } from '../models/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -11,33 +11,32 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
   // Get List of Items in Cart Service for User (Based on User ID)
-  public getAllItem(id: number): Observable<Array<Cart>>{
-    return this.http.get<Array<Cart>>(`https://localhost:7009/ShopAPI/Cart/GetAllItem/${id}`);
+  public getAllItem(): Observable<Array<Cart>>{
+    return this.http.get<Array<Cart>>(`http://www.shop-api.somee.com/ShopAPI/Cart/GetAllItem`);
   }
 
   // Add Product into User Cart Service (Based on User ID & Product ID)
-  public addItem(request: AddCart): Observable<any>{
-    return this.http.post<any>('https://localhost:7009/ShopAPI/Cart/AddItem', request);
+  public addItem(productId: number): Observable<any>{
+    return this.http.post<any>(`http://www.shop-api.somee.com/ShopAPI/Cart/AddItem?productId=${productId}`, productId);
   }
 
   // Increase Product Quantity in User Cart Service (Based on Cart ID)
-  public increaseQuantity(id: number): Observable<any>{
-    return this.http.put<any>('https://localhost:7009/ShopAPI/Cart/IncreaseQuantity', id);
+  public increaseQuantity(cartId: number): Observable<Cart>{
+    return this.http.put<Cart>(`http://www.shop-api.somee.com/ShopAPI/Cart/IncreaseQuantity?cartId=${cartId}`, cartId);
   }
 
   // Decrease Product Quantity in User Cart Service (Based on Cart ID)
-  public decreaseQuantity(id: number): Observable<Cart>{
-    console.log(id);
-    return this.http.put<Cart>('https://localhost:7009/ShopAPI/Cart/DecreaseQuantity', id);
+  public decreaseQuantity(cartId: number): Observable<Cart>{
+    return this.http.put<Cart>(`http://www.shop-api.somee.com/ShopAPI/Cart/DecreaseQuantity?cartId=${cartId}`, cartId);
   }
 
   // Remove Specific Product in User Cart Service (Based on Cart ID)
-  public removeItem(id: number): Observable<any>{
-    return this.http.delete<any>(`https://localhost:7009/ShopAPI/Cart/RemoveItem/${id}`);
+  public removeItem(cartId: number): Observable<any>{
+    return this.http.delete<any>(`http://www.shop-api.somee.com/ShopAPI/Cart/RemoveItem?cartId=${cartId}`);
   }
 
   // Remove All Product in User Cart Service (Based on User ID)
-  public removeAllItem(id: number): Observable<any>{
-    return this.http.delete<any>(`https://localhost:7009/ShopAPI/Cart/RemoveAllItem/${id}`);
+  public removeAllItem(): Observable<any>{
+    return this.http.delete<any>(`http://www.shop-api.somee.com/ShopAPI/Cart/RemoveAllItem`);
   }
 }
